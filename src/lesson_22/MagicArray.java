@@ -12,8 +12,9 @@ public class MagicArray {
 
     // TODO Homework 22
     public MagicArray(int[] array) {
-        this.array = new int[array.length];
+//        this.array = new int[array.length];
         this.array = array;
+        this.cursor = array.length;
     }
 
     public void test() {

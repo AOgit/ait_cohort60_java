@@ -41,5 +41,6 @@ public class Les22Main {
         System.out.println("Init new MagicArray:");
         MagicArray magic1 = new MagicArray(new int[]{2, 3, 4, 5, 2, 4,});
         magic1.test();
+        System.out.println(magic1.size());
     }
 }
