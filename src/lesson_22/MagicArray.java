@@ -13,8 +13,12 @@ public class MagicArray {
     // TODO Homework 22
     public MagicArray(int[] array) {
 //        this.array = new int[array.length];
-        this.array = array;
-        this.cursor = array.length;
+        if (array.length > 0 ) {
+            this.array = array;
+            this.cursor = array.length;
+        } else {
+           this.array = new int[10];
+        }
     }
 
     public void test() {
