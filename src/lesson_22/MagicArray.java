@@ -10,14 +10,17 @@ public class MagicArray {
         this.array = new int[10];
     }
 
-    // TODO Homework 22
+    // Homework 22
     public MagicArray(int[] array) {
 //        this.array = new int[array.length];
-        if (array.length > 0 ) {
-            this.array = array;
-            this.cursor = array.length;
+        if (array == null || array.length == 0) {
+            this.array = new int[10];
         } else {
-           this.array = new int[10];
+//            this.array = array;
+//            this.cursor = array.length;
+//            this.expandArray();
+            this.array = new int[array.length * 2]; // чтобы избежать expandArray
+            add(array);
         }
     }
 
@@ -96,7 +99,7 @@ public class MagicArray {
         return -1;
     }
 
-    // TODO Homework 22
+    // Homework 22
     public int lastIndexOf(int value){
         for(int i = cursor - 1; i >= 0; i--){
             if(this.array[i] == value) return i;
@@ -104,9 +107,10 @@ public class MagicArray {
         return -1;
     }
 
-    // TODO Homework 22
+    //  Homework 22
     public boolean removeByValue(int value) {
        int inx = indexOf(value);
+       if (inx == -1) return false;
        return remove(inx) == value;
     }
 

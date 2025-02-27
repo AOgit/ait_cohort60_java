@@ -27,7 +27,7 @@ public class Les22Main {
         magic.test();
         System.out.println(magic.toString());
         System.out.println(magic.indexOf(1));
-        // TODO Homework 22
+        // Homework 22
         System.out.println("=====Homework 22===========");
         magic.test();
 //        System.out.println(magic.size());
@@ -41,6 +41,11 @@ public class Les22Main {
         System.out.println("Init new MagicArray:");
         MagicArray magic1 = new MagicArray(new int[]{2, 3, 4, 5, 2, 4,});
         magic1.test();
+        int[] test = {1, 2, 3, 4, 5};
+        MagicArray magic5 = new MagicArray(test);
+        test[4] = 1000;
+        magic5.test();
+        System.out.println("=====");
         System.out.println(magic1.size());
         MagicArray magic2 = new MagicArray(new int[]{});
         magic2.test();
@@ -48,5 +53,7 @@ public class Les22Main {
         magic2.add(1, 2, 4);
         System.out.println(magic2.size());
         magic2.test();
+        MagicArray magic3 = new MagicArray(null);
+        magic3.test();
     }
 }
