@@ -8,7 +8,7 @@ public class Lesson23Main {
         cat.sayMeow();
         System.out.println(cat.toString());
         // не будет работать
-//        cat.isProtected = true; // только в наследниках классах и в одном пакете
-//        cat.isDefault = false; // только в наследниках классах и в одном пакете
+//        cat.isProtected = true; // только в наследниках класса и в одном пакете
+//        cat.isDefault = false; // только в наследниках класса и в одном пакете
     }
 }
