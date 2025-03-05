@@ -9,8 +9,8 @@ public class Hw26Task3 {
        String[] words = string.split(" ");
        StringBuilder str = new StringBuilder();
        for (int i = 0; i < words.length; i++) {
-          str.append(words[i].substring(0,1).toUpperCase());
+          str.append(words[i].charAt(0));
        }
-       return str.toString();
+       return str.toString().toUpperCase();
     }
 }

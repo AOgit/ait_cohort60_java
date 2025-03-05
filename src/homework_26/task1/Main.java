@@ -16,6 +16,8 @@ public class Main {
         Circle circle = new Circle("Круг №1");
         circle.setRadius(7);
         circle.name = "Круг №2";
+//        Class <?> clazz = Circle.class;
+//        System.out.println(clazz.getSimpleName() );
         circle.displayInfo();
         circle.calculateArea();
         circle.setColor("red");
