@@ -79,7 +79,7 @@ public class Autobus {
 //            return true;
 //        }
         if (countPassengers < capacity) {
-            if (isPassengerInBus(passenger)) {
+            if (isPassengerInBus(passenger) > 0) {
                 System.out.printf("Пассажир с id %d уже в автобусе с id %d\n", passenger.getId(), this.getId());
                 return false;
             }
@@ -95,29 +95,28 @@ public class Autobus {
     public boolean dropPassenger(Passenger passenger)
     {
         if (passenger == null || countPassengers == 0) return false;
-//      проверку isPassengerInBus(passenger) не использую чтоб 2 раза цикл не гонять
         System.out.println(Arrays.toString(passengers));
-            for (int i = 0; i < countPassengers; i++) {
-                if (this.passengers[i].getId() == passenger.getId()) {
-                    for (int j = i; j < countPassengers - 1; j++) {
-                        this.passengers[i] = this.passengers[i + 1];
-                    }
-                    passengers[countPassengers - 1] = null;
-                    this.countPassengers--;
-                    System.out.println(Arrays.toString(passengers));
-                    System.out.printf("Пассажир с id %d высажен c автобуса", passenger.getId());
-                    return true;
-                }
-            }
-        System.out.println("Такой пассажир в автобусе не найден");
-        return false;
+
+        int inx = isPassengerInBus(passenger);
+        if (inx == -1) {
+            System.out.println("Такой пассажир в автобусе не найден");
+            return false;
+        }
+        for (int i = inx; i < countPassengers - 1; i++) {
+            this.passengers[i] = this.passengers[i + 1];
+        }
+        passengers[countPassengers - 1] = null;
+        this.countPassengers--;
+        System.out.println(Arrays.toString(passengers));
+        System.out.printf("Пассажир с id %d высажен c автобуса\n", passenger.getId());
+        return true;
     }
 
-    private boolean isPassengerInBus(Passenger passenger) {
+    private int isPassengerInBus(Passenger passenger) {
         for (int i = 0; i < countPassengers; i++) {
-            if (this.passengers[i].getId() == passenger.getId()) return true;
+            if (this.passengers[i].getId() == passenger.getId()) return i;
         }
-        return false;
+        return -1;
     }
 
     public void setDriver(BusDriver driver) {

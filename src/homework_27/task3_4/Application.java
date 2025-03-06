@@ -25,7 +25,7 @@ public class Application {
         System.out.println("\n=============");
         System.out.println(bus);
         // TODO Task 4
-        bus.dropPassenger(karl);
+        bus.dropPassenger(john);
         Passenger max = new Passenger("Max");
         bus.dropPassenger(max);
 
