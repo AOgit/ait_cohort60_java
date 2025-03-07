@@ -14,4 +14,7 @@ public class Dog extends Animal{
         return super.toString() + " | Dog. Дополнение к возврату от родительского класса";
     }
 
+    public void bark() {
+        System.out.println("Собака гавкает");
+    }
 }
