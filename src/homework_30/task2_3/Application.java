@@ -22,7 +22,7 @@ public class Application {
 
                 if (i > 0 && paymentSystems[i - 1] instanceof Account) {
                     System.out.println("\n========Transfer============");
-                    paymentSystems[i].transferMoney(100, (Account) paymentSystems[i - 1]);
+                    paymentSystems[i].transferMoney(10, (Account) paymentSystems[i - 1]);
                 }
 
                 System.out.println("=============================");

@@ -1,6 +1,6 @@
 package homework_30.task2_3;
 
-public class Account {
+public abstract class Account {
     private String currency;
     private double balance;
 
