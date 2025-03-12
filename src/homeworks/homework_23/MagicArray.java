@@ -1,32 +1,26 @@
-   package _lists;
+package homeworks.homework_23;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Objects;
 
-   public class MyArrayList<T> implements MyList<T> {
-    private T[] array;
+public class MagicArray {
+    private int[] array;
     private int cursor;
 
-    public MyArrayList(){
-//        this.array = new int[10]
-        // Стирание типов. Невозможно создать объект типа Т
-//        this.array = new T[10];
-          this.array = (T[]) new Object[10];
-
+    public MagicArray(){
+        this.array = new int[10];
     }
 
     // Homework 22
-    public MyArrayList(T[] array) {
+    public MagicArray(int[] array) {
 //        this.array = new int[array.length];
         if (array == null || array.length == 0) {
-            this.array = (T[]) new Object[10];
+            this.array = new int[10];
         } else {
 //            this.array = array;
 //            this.cursor = array.length;
 //            this.expandArray();
-            this.array = (T[]) new Object[array.length * 2]; // чтобы избежать expandArray
-            addAll(array);
+            this.array = new int[array.length * 2]; // чтобы избежать expandArray
+            add(array);
         }
     }
 
@@ -34,11 +28,11 @@ import java.util.Objects;
         System.out.println(Arrays.toString(this.array));
     }
 
-    public void add(T object){
+    public void add(int value){
         if(this.cursor == this.array.length) {
             expandArray();
         }
-        this.array[this.cursor] = object;
+        this.array[this.cursor] = value;
         this.cursor++;
     }
 
@@ -47,7 +41,7 @@ import java.util.Objects;
         // 2. Переписать в новый массив все значения из старого
         // 3. Перебросить указатель
         System.out.println("Расширяем внутренний массив! Курсор = " + this.cursor);
-        T[] newArray = (T[]) new Object[this.array.length * 2];
+        int[] newArray = new int[this.array.length * 2];
         for (int i = 0; i < cursor; i++){
             newArray[i] = array[i];
         }
@@ -58,19 +52,19 @@ import java.util.Objects;
         return this.cursor;
    }
 
-    public T get(int index) {
+    public int get(int index) {
         // TODO Поправить обработку некорректного индекса
-        return this.isValidIndex(index) ?  this.array[index] : null;
+        return this.isValidIndex(index) ?  this.array[index] : -2_147_483_647;
    }
 
     // Добавление в массив нескольких элементов
-    public void addAll(T... objects) {
+    public void add(int... numbers) {
         // c numbers я могу обращаться точно также, как всо ссылкой на массив int
 //        System.out.println("Принял несколько int: " + numbers.length);
 //        System.out.println(Arrays.toString(numbers));
 
-       for (int i = 0; i < objects.length; i++){
-           add(objects[i]);
+       for (int i = 0; i < numbers.length; i++){
+           add(numbers[i]);
        }
 
     }
@@ -79,51 +73,45 @@ import java.util.Objects;
         return index >= 0 && index < this.cursor;
     }
 
-    public T remove(int index) {
+    public int remove(int index) {
         if (this.isValidIndex(index)) {
-            T object = this.array[index];
+            int value = this.array[index];
 
             for (int i = index; i < this.cursor - 1; i++){
                this.array[i] = this.array[i + 1];
             }
 
             // Fixed Пофиксена проблема с последним элементом массива при удалении
-            this.array[this.size()-1] = null;
+            this.array[this.size()-1] = 0;
             this.cursor--;
-            return object;
+            return value;
         }
-        return null;
+        return -2_147_483_647;
    }
 
    // Поиск по значению
-    public int indexOf(T object) {
+    public int indexOf(int value) {
         // Перебираю элементы
         // Если элемент равен искомому - вернуть индекс, иначе -1
         for(int i = 0; i < this.cursor; i++) {
-            if (Objects.equals(array[i], object)) return i;
-//            if (this.array[i].equals(object)) return i;
+            if (this.array[i] == value) return i;
         }
         return -1;
     }
 
-    public boolean contains(T object) {
-        return indexOf(object) >= 0;
-    }
-
     // Homework 22
-    public int lastIndexOf(T object){
+    public int lastIndexOf(int value){
         for(int i = cursor - 1; i >= 0; i--){
-            if (Objects.equals(array[i], object)) return i;
-//            if(this.array[i].equals(object)) return i;
+            if(this.array[i] == value) return i;
         }
         return -1;
     }
 
     //  Homework 22
-    public boolean remove(T object) {
-       int inx = indexOf(object);
+    public boolean removeByValue(int value) {
+       int inx = indexOf(value);
        if (inx == -1) return false;
-       return  Objects.equals(remove(inx), object);
+       return remove(inx) == value;
     }
 
     public String toString() {
@@ -135,43 +123,12 @@ import java.util.Objects;
         return result;
     }
 
-//    public T[] toArray(){
-//        T[] arr = (T[]) new Object[cursor];
-//        for (int i = 0; i < cursor; i++){
-//            arr[i] = this.array[i];
-//        }
-//        return arr;
-//    }
-
     // TODO Написать метод public int[] toArray() возвращающий массив, состоящий из элементов магического массива.
-    public T[] toArray(){
-//        T[] arr = (T[]) new Object[cursor];
-        if (cursor == 0) return null;
-
-        Class<T> clazz = (Class<T>) array[0].getClass();
-        System.out.println("clazz: " + clazz);
-
-       // Создаю массив того же типа, что и 0-й элемент
-        T[] result = (T[]) Array.newInstance(clazz, cursor);
-
+    public int[] toArray(){
+        int[] arr = new int[cursor];
         for (int i = 0; i < cursor; i++){
-            result[i] = this.array[i];
+            arr[i] = this.array[i];
         }
-        return result;
-    }
-
-
-
-    public boolean isEmpty() {
-        return this.cursor == 0;
-    }
-
-    @Override
-    public void set(int index, T value) {
-        if (index < 0 || index > cursor - 1) {
-            System.out.println("Индекс выходит за предел массива. Элемент не может быть добавлен");
-            return;
-        }
-        this.array[index] = value;
+        return arr;
     }
 }
