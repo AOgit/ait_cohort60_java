@@ -63,12 +63,13 @@ public class Person {
             if (Character.isDigit(ch)) passed[0] = true;
             if (Character.isLowerCase(ch)) passed[1] = true;
             if (Character.isUpperCase(ch)) passed[2] = true;
-            for(char specCh: "!%$@&*()[]<.-".toCharArray()) {
-                if (ch == specCh) {
-                    passed[3] = true;
-                    break;
-                }
-            }
+//            for(char specCh: "!%$@&*()[]<.-".toCharArray()) {
+//                if (ch == specCh) {
+//                    passed[3] = true;
+//                    break;
+//                }
+//            }
+        if ("!%$@&*()[]<.-".contains(String.valueOf(ch))) passed[3] = true;
         }
 //        System.out.println(Arrays.toString(passed));
         for (boolean bool: passed) if (!bool) return false;
