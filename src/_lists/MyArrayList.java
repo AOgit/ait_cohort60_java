@@ -2,6 +2,7 @@
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
    public class MyArrayList<T> implements MyList<T> {
@@ -174,4 +175,32 @@ import java.util.Objects;
         }
         this.array[index] = value;
     }
-}
+
+    // Невозможно вернуть объект типа интерфейс
+       // Если тип возвращаемого значения (или параметр метода) имеет тип интерфейс,
+       // это значит, что я должден вернуть обьект класса, который имплементировал этот интерфейс
+       @Override
+       public Iterator<T> iterator() {
+           return new MyIterator();
+       }
+
+       private class MyIterator implements Iterator<T> {
+            int currentIndex = 0;
+
+           @Override
+           public boolean hasNext() {
+               return currentIndex < cursor;
+           }
+
+           @Override
+           public T next() {
+//               T value = array[currentIndex];
+//               currentIndex++;
+//               return value;
+               return array[currentIndex++];
+           }
+       } // End class MyIterator
+
+
+
+   }

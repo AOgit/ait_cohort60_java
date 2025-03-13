@@ -1,10 +1,10 @@
 package homeworks.homework_32.task3;
 
-public class NumericPair <T extends Number>{
+public class NumericPair <T extends Number, E extends Number>{
     private T var1;
-    private T var2;
+    private E var2;
 
-    public NumericPair(T var1, T var2) {
+    public NumericPair(T var1, E var2) {
         this.var1 = var1;
         this.var2 = var2;
     }
