@@ -40,4 +40,21 @@ public class PersonTest {
         Assertions.assertEquals(START_EMAIL, person.getEmail());
    }
 
+    // 0. Беру валидный Password
+    // 1. Устанавливаю его сеттером person-y
+    // 2. Мы ожидаем: что у person в поле password будет значение, которое мы установили в шаге 2
+    @ParameterizedTest
+    @ValueSource(strings = {"Pa$$w-1rd", "qwerty.D1e"/*, "Pass"*/})
+    void testValidPasswordSet(String validPassword) {
+        person.setPassword(validPassword);
+        Assertions.assertEquals(validPassword, person.getPassword());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Pa$$w-1r", "PA$$W0RD", "pa$$w0rd", "Passw0rd", "Pa$$word"/*, "Pa$$w0rd"*/})
+    void testNotValidPasswordSet(String notValidPassword) {
+        person.setPassword(notValidPassword);
+        Assertions.assertNotEquals(notValidPassword, person.getPassword());
+        Assertions.assertEquals(START_PASSWORD, person.getPassword());
+    }
 }
