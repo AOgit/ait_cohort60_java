@@ -9,6 +9,11 @@ public class RectangleUtils {
             myList.remove(rectangle);
             result++;
         }
+        if (result > 0) {
+            myList.add(rectangle);
+            result--;
+        }
+
         return result;
     }
 }
