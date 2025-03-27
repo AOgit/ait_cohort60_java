@@ -6,7 +6,8 @@ import java.util.Comparator;
 public class App {
     public static void main(String[] args) {
         Sportsman[] sportsmen = {
-                new Sportsman("Микола", 25, 100),
+                new Sportsman("Микола", 25, 100.1),
+                new Sportsman("Грицько", 25, 100.5),
                 new Sportsman("Иван", 55, 250),
                 new Sportsman("Стецько", 18, 50)
         };
