@@ -12,9 +12,10 @@ public class ListCollections {
 
     }
 
-    public static List<Integer> listCompare(List<Integer> list1, List<Integer> list2) {
-        list1.retainAll(list2);
-       return list1;
+    public static <T> List<T> listCompare(List<T> list1, List<T> list2) {
+        List<T> temp = new LinkedList<>(list1);
+        temp.retainAll(list2);
+        return temp;
     }
 
 }
