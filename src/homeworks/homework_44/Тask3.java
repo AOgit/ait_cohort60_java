@@ -5,6 +5,7 @@ public class Тask3 {
         String string = "abcdefj ab,cdf,";
         System.out.println(StringUtil.getFirstUniqueChar(string));
         System.out.println(StringUtil.getFirstUniqueChar1(string));
+        System.out.println(StringUtil.getFirstUniqueChar2(string));
     }
 
 }
