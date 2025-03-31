@@ -43,7 +43,7 @@ public abstract class StringUtil {
 
     // Потом бы регуляркой воспользовался
     public static String getFirstUniqueChar1(String string) {
-        Pattern pattern = Pattern.compile("(.)(?!.*\\1.*$)");
+        Pattern pattern = Pattern.compile("(.)(?!.*?\\1.*?$)");
         Matcher matcher = pattern.matcher(string);
         if (matcher.find()) return matcher.group();
         return "";
