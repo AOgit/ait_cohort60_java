@@ -17,7 +17,7 @@ public abstract class StringUtil {
         return treeSet;
     }
 
-   private static List<String> stringToList(String string) {
+   public static List<String> stringToList(String string) {
        // заменить все Небуквы на пустоту
        String newString = string.replaceAll("[^a-zA-Zа-яА-я-1-9 ]", "");
 //        newString = newString.replaceAll("\s+", " ");
