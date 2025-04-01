@@ -50,11 +50,16 @@ public abstract class StringUtil {
     }
 
     // Ну и использование Set для поиска
-    public static char getFirstUniqueChar2(String string) {
+    public static char getFirstUniqueChar3(String string) {
         Set<Character> linkedHashSet = new LinkedHashSet<>();
+        Set<Character> doubleHashSet = new HashSet<>();
         for(char Ch: string.toCharArray()) {
-            if (!linkedHashSet.add(Ch)) linkedHashSet.remove(Ch);
+            if (!linkedHashSet.add(Ch)) doubleHashSet.add(Ch);
         }
+        linkedHashSet.removeAll(doubleHashSet);
         return !linkedHashSet.isEmpty() ? linkedHashSet.iterator().next() : '\0';
     }
+
+
+
 }
