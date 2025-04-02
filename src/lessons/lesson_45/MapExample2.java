@@ -14,6 +14,9 @@ public class MapExample2 {
         map.put(17, "orange");
         map.put(7, "red");
 
+        map.compute(167, (k, oldVal) -> oldVal == null ? "rr" : "?");
+        System.out.println(map);
+
         // Collection<V> values()  -  возвращает коллекцию всех значений карты
         Collection<String> values = map.values();
         System.out.println("map.values(): " + values);
