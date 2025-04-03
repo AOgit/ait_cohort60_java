@@ -18,7 +18,10 @@ public class Taks2 {
 
     private static List<String> stringsFilter(List<String> list, char ch) {
         return list.stream()
-                .filter(string -> string.toLowerCase().toCharArray()[0] == Character.toLowerCase(ch))
+//                .filter(string -> string.toLowerCase().toCharArray()[0] == Character.toLowerCase(ch))
+//                .filter(s -> s.charAt(0) == ch)
+//                .filter(s -> s.substring(0,1).equalsIgnoreCase(String.valueOf(ch)))
+                .filter(s -> s.toUpperCase().startsWith(String.valueOf(ch)))
                 .sorted()
                 .map(string -> String.format("\n%s", string))
                 .toList();

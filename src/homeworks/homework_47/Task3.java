@@ -1,6 +1,7 @@
 package homeworks.homework_47;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Task3 {
     public static void main(String[] args) {
@@ -15,8 +16,10 @@ public class Task3 {
 
     private static List<Person> filter(List<Person> list, Integer age, String city) {
         return list.stream()
+                .filter(Objects::nonNull) // Not null check
                 .filter(person -> person.getAge() > age)
-                .filter(person -> person.getCity().toLowerCase().equals(city.toLowerCase()))
+                .filter(person -> Objects.nonNull(person.getCity())) // Not null getCity check
+                .filter(person -> person.getCity().equalsIgnoreCase(city))
                 .toList();
     }
 }
