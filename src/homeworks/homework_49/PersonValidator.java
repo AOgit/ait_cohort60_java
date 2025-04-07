@@ -1,5 +1,8 @@
 package homeworks.homework_49;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PersonValidator {
 
     public static void validateEmail(String email) throws EmailValidateException {
@@ -35,16 +38,26 @@ public class PersonValidator {
 
     public static void validatePassword(String password) throws PasswordValidateException{
         if (password == null) throw new PasswordValidateException("password should be not null");
-        if (password.length() < 8) throw new PasswordValidateException("password must be longer than 8 characters");
-        boolean[] passed = new boolean[4];
-        for (char ch: password.toCharArray()) {
-            if (Character.isDigit(ch)) passed[0] = true;
-            if (Character.isLowerCase(ch)) passed[1] = true;
-            if (Character.isUpperCase(ch)) passed[2] = true;
-            if ("!%$@&*()[]<.-".contains(String.valueOf(ch))) passed[3] = true;
-        }
-        for (boolean bool: passed) if (!bool) throw new PasswordValidateException("password does not meet requirements");
 
+        Map<String, String> errMap = new HashMap<>();
+        errMap.put("digit", "\n- отсутствует цифра");
+        errMap.put("lowerCase", "\n- отсутствует буква в нижнем регистре");
+        errMap.put("upperCase", "\n- отсутствует буква в верхнем регистре");
+        errMap.put("special", "\n- отсутствует спецсимвол");
+
+        if (password.length() < 8) errMap.put("length", "\n- длина меньше 8 символов");
+        for (char ch: password.toCharArray()) {
+            if (Character.isDigit(ch)) errMap.remove("digit");
+            if (Character.isLowerCase(ch)) errMap.remove("lowerCase");
+            if (Character.isUpperCase(ch)) errMap.remove("upperCase");
+            if ("!%$@&*()[]<.-".contains(String.valueOf(ch))) errMap.remove("special");
+        }
+
+        if (!errMap.isEmpty()) {
+            StringBuilder errMsg = new StringBuilder("\nПароль не соответствует минимальным требованиям: ");
+            errMap.forEach((k, v) -> errMsg.append(v));
+            throw new PasswordValidateException(errMsg.toString());
+        }
     }
 
     }
